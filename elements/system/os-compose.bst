@@ -1,12 +1,12 @@
 kind: compose
 
 description: |
-  Immutable velociraptor root filesystem composition (Umbriel + Noctalia v5 + Native Steam + Flathub Suite).
+  Immutable velociraptor root filesystem composition (Umbriel + Noctalia v5 + Homebrew + Native Steam + Flathub Suite).
 
 build-depends:
 - core/base-platform.bst
+- core/homebrew.bst
 - core/flathub.bst
-- core/fish.bst
 - core/kernel.bst
 - core/bootloader.bst
 - core/bootc.bst
@@ -19,8 +19,6 @@ build-depends:
 - desktop/papirus-icon-theme.bst
 - desktop/portals-stack.bst
 - apps/wezterm.bst
-- apps/neovim.bst
-- apps/lazygit.bst
 - apps/nemo.bst
 - apps/engrampa.bst
 - apps/atril.bst

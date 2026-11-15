@@ -1,7 +1,7 @@
 kind: stack
 
 description: |
-  Pure freedesktop-sdk core system stack (systemd, git, sudo, openssh, PipeWire, Flatpak) + local system-plumbing.
+  Pure freedesktop-sdk core system stack (systemd, curl, sudo, openssh, PipeWire, Flatpak) + local system-plumbing.
 
 depends:
 - junction: junctions/freedesktop-sdk.bst
@@ -9,7 +9,7 @@ depends:
 - junction: junctions/freedesktop-sdk.bst
   filename: components/systemd.bst
 - junction: junctions/freedesktop-sdk.bst
-  filename: components/git.bst
+  filename: components/curl.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/sudo.bst
 - junction: junctions/freedesktop-sdk.bst
