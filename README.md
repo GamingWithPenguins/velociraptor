@@ -1,6 +1,7 @@
 # velociraptor
 
-Non-GNOME fork of Jorge Castro's Dakotaraptor (Bluefin) built on pure `freedesktop-sdk` (25.08) with BuildStream v2 and `bootc` OCI output (zero `rpm-ostree`, zero `gnome-build-meta`).
+Inspired by Bluefun's Dakotaraptor built on pure `freedesktop-sdk` (25.08) with BuildStream v2 and `bootc` OCI output (zero `rpm-ostree`, zero `gnome-build-meta`).
+The evidence points to Velociraptor being a nocturnal predator, which makes it the perfect raptor hosting a compositor and desktop shell named around the theming of night. 
 
 ## Stack Highlights
 - **Kernel (`core/kernel.bst`)**: Open Gaming Collective (OGC) Kernel (`OpenGamingCollective/linux`, `sched_ext`, `ntsync`) for Release 1 (isolated for future CachyOS kernel swap)
