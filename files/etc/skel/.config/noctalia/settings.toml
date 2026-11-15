@@ -1,0 +1,31 @@
+[first_run]
+show_theme_picker = true
+
+[idle]
+enabled = true
+lock_timeout_secs = 300
+dpms_timeout_secs = 420
+suspend_timeout_secs = 600
+
+[security]
+polkit_agent = true
+lock_on_suspend = true
+
+[theme.icons]
+theme = "Papirus-Dark"
+sync_papirus_folders = true
+
+[theme.templates]
+enable_builtin_templates = true
+builtin_ids = [
+  "gtk3",
+  "gtk4",
+  "zen-browser",
+  "wezterm",
+]
+
+[theme.flatpak]
+sync_gtk3 = true
+sync_gtk4 = true
+override_xdg_config = true
+on_theme_change = "/usr/bin/noctalia-flatpak-theme-sync"

@@ -1,0 +1,4 @@
+[greeter]
+default_session = "umbriel"
+icon_theme = "Papirus-Dark"
+sync_user_theme = true

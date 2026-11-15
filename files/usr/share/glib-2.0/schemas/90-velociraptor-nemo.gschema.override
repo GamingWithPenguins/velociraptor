@@ -1,0 +1,9 @@
+[org.cinnamon.desktop.default-applications.terminal]
+exec='wezterm'
+
+[org.nemo.desktop]
+show-desktop-icons=false
+
+[org.nemo.preferences]
+show-hidden-files=false
+default-folder-viewer='icon-view'

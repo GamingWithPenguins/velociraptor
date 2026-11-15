@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Umbriel (Noctalia)
+Comment=Noctalia Umbriel Wayland Compositor
+Exec=env XDG_CURRENT_DESKTOP=umbriel umbriel
+Type=Application
+DesktopNames=umbriel

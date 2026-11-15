@@ -1,0 +1,15 @@
+{
+  "policies": {
+    "DisableAppUpdate": true,
+    "Preferences": {
+      "toolkit.legacyUserProfileCustomizations.stylesheets": {
+        "Value": true,
+        "Status": "default"
+      },
+      "widget.use-xdg-desktop-portal.file-picker": {
+        "Value": 1,
+        "Status": "default"
+      }
+    }
+  }
+}
