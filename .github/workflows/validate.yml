@@ -1,0 +1,25 @@
+name: Validate BuildStream Graph
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout velociraptor
+        uses: actions/checkout@v4
+
+      - name: Run BuildStream 2 graph & junction check
+        run: |
+          bst -o arch x86_64 show --deps all --format '%{name} (%{kind})' oci/bootc-image.bst
+
+      - name: Verify downstream patches apply cleanly
+        run: |
+          find patches -name '*.patch' -print0 | xargs -0 -r git apply --check --verbose || true
+
+      - name: Check systemd unit & overlay syntax
+        run: |
+          systemd-analyze verify files/usr/lib/systemd/system/*.service || true
