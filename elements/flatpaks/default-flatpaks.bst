@@ -1,7 +1,17 @@
 kind: manual
 
 description: |
-  Default Flathub application suite for velociraptor (Paperwork, Spotify, Heroic, Popsicle, Bitwarden, GIMP, mpv, Discord, Zed, Collabora Office).
+  Default Flathub application suite for velociraptor (Paperwork, File Roller, Spotify, Heroic, Popsicle, Bitwarden, GIMP, mpv, Discord, Zed, Collabora Office).
+
+sources:
+- kind: local
+  path: files/etc/flatpak/default-flatpaks.list
+- kind: local
+  path: files/usr/lib/systemd/system/velociraptor-flatpak-sync.service
+- kind: local
+  path: files/usr/lib/systemd/system/velociraptor-flatpak-update.service
+- kind: local
+  path: files/usr/lib/systemd/system/velociraptor-flatpak-update.timer
 
 build-depends:
 - core/base-platform.bst
@@ -16,76 +26,12 @@ runtime-depends:
 config:
   install-commands:
   - |
+    install -Dm644 default-flatpaks.list "%{install-root}%{sysconfdir}/flatpak/default-flatpaks.list"
+    install -Dm644 velociraptor-flatpak-sync.service "%{install-root}%{indep-libdir}/systemd/system/velociraptor-flatpak-sync.service"
+    install -Dm644 velociraptor-flatpak-update.service "%{install-root}%{indep-libdir}/systemd/system/velociraptor-flatpak-update.service"
+    install -Dm644 velociraptor-flatpak-update.timer "%{install-root}%{indep-libdir}/systemd/system/velociraptor-flatpak-update.timer"
     mkdir -p "%{install-root}%{datadir}/flatpak/preinstall.d"
-    mkdir -p "%{install-root}%{sysconfdir}/flatpak"
-    mkdir -p "%{install-root}%{indep-libdir}/systemd/system/multi-user.target.wants"
-    cat << 'EOF' > "%{install-root}%{sysconfdir}/flatpak/default-flatpaks.list"
-    work.openpaper.Paperwork
-    com.spotify.Client
-    com.heroicgameslauncher.hgl
-    com.system76.Popsicle
-    com.bitwarden.desktop
-    org.gimp.GIMP
-    io.mpv.Mpv
-    com.discordapp.Discord
-    dev.zed.Zed
-    com.collaboraoffice.Office
-    EOF
-    cat << 'EOF' > "%{install-root}%{datadir}/flatpak/preinstall.d/velociraptor-default.preinstall"
-    [Flatpak Preinstall work.openpaper.Paperwork]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall com.spotify.Client]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall com.heroicgameslauncher.hgl]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall com.system76.Popsicle]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall com.bitwarden.desktop]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall org.gimp.GIMP]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall io.mpv.Mpv]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall com.discordapp.Discord]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall dev.zed.Zed]
-    Branch=stable
-    IsRuntime=false
-
-    [Flatpak Preinstall com.collaboraoffice.Office]
-    Branch=stable
-    IsRuntime=false
-    EOF
-    cat << 'EOF' > "%{install-root}%{indep-libdir}/systemd/system/velociraptor-flatpak-sync.service"
-    [Unit]
-    Description=Install default Flathub application suite for velociraptor
-    After=network-online.target velociraptor-flathub-remote.service
-    Wants=network-online.target velociraptor-flathub-remote.service
-    ConditionPathExists=!/var/lib/flatpak/.velociraptor-defaults-installed
-
-    [Service]
-    Type=oneshot
-    RemainAfterExit=yes
-    ExecStart=/bin/sh -c 'xargs -r /usr/bin/flatpak install --system --noninteractive --or-update flathub < /etc/flatpak/default-flatpaks.list && touch /var/lib/flatpak/.velociraptor-defaults-installed'
-
-    [Install]
-    WantedBy=multi-user.target
-    EOF
-    ln -sf ../velociraptor-flatpak-sync.service \
-      "%{install-root}%{indep-libdir}/systemd/system/multi-user.target.wants/velociraptor-flatpak-sync.service"
+    while IFS= read -r app; do
+      [ -n "${app}" ] || continue
+      printf '[Flatpak Preinstall %s]\nBranch=stable\nIsRuntime=false\n\n' "${app}"
+    done < default-flatpaks.list > "%{install-root}%{datadir}/flatpak/preinstall.d/velociraptor-default.preinstall"

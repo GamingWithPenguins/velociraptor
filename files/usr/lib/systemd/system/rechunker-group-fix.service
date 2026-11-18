@@ -1,0 +1,14 @@
+[Unit]
+Description=Reconcile system groups on rechunked OCI bootc upgrades
+DefaultDependencies=no
+After=systemd-sysusers.service
+Before=sysinit.target local-fs.target
+ConditionPathExists=/usr/lib/sysusers.d/velociraptor-system.conf
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/systemd-sysusers
+
+[Install]
+WantedBy=sysinit.target

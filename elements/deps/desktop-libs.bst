@@ -1,26 +1,11 @@
 kind: meson
 
 description: |
-  Shared GTK3/desktop companion libraries (cinnamon-desktop, xapp, mate-desktop, gvfs, poppler-glib, libarchive, inih, sassc) for Nemo, Engrampa, Atril, imv, and adw-gtk3.
+  Toolkit-agnostic companion libraries (gvfs, poppler-glib, libarchive, inih, sassc) for Luciole, imv, and adw-gtk3 (zero GTK3).
 
 sources:
 - kind: git_repo
-  url: github:linuxmint/cinnamon-desktop.git
-  track: 6.4.*
-  ref: 6.4.1-0-g41e8c9d2b105
-- kind: git_repo
-  url: github:linuxmint/xapp.git
-  directory: subprojects/xapp
-  track: 2.8.*
-  ref: 2.8.6-0-g82b4a1c9f018
-- kind: git_repo
-  url: github:mate-desktop/mate-desktop.git
-  directory: subprojects/mate-desktop
-  track: v1.28.*
-  ref: v1.28.2-0-g39a0f1e4c721
-- kind: git_repo
   url: gnome:gvfs.git
-  directory: subprojects/gvfs
   track: 1.56.*
   ref: 1.56.1-0-g77e3a1c9f012
 - kind: git_repo
@@ -48,7 +33,7 @@ build-depends:
 - junction: junctions/freedesktop-sdk.bst
   filename: public-stacks/buildsystem-meson.bst
 - junction: junctions/freedesktop-sdk.bst
-  filename: components/gtk3.bst
+  filename: components/glib.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/librsvg.bst
 - junction: junctions/freedesktop-sdk.bst
@@ -57,7 +42,7 @@ build-depends:
 
 runtime-depends:
 - junction: junctions/freedesktop-sdk.bst
-  filename: components/gtk3.bst
+  filename: components/glib.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/librsvg.bst
 - junction: junctions/freedesktop-sdk.bst

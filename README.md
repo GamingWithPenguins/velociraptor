@@ -1,28 +1,22 @@
 # velociraptor
 
-Inspired by Bluefun's Dakotaraptor built on pure `freedesktop-sdk` (25.08) with BuildStream v2 and `bootc` OCI output (zero `rpm-ostree`, zero `gnome-build-meta`).
-The evidence points to Velociraptor being a nocturnal predator, which makes it the perfect raptor hosting a compositor and desktop shell named around the theming of night. 
+Pure `freedesktop-sdk` (25.08) BuildStream v2 desktop gaming OS forked from Bluefin Dakota with two deliberate breaks:
 
-## Stack Highlights
-- **Kernel (`core/kernel.bst`)**: Open Gaming Collective (OGC) Kernel (`OpenGamingCollective/linux`, `sched_ext`, `ntsync`) for Release 1 (isolated for future CachyOS kernel swap)
-- **Bootloader (`core/bootloader.bst`)**: `systemd-boot` + `bootupd` + `efibootmgr` for Release 1 (isolated for future `rEFInd` swap)
-- **Shell & CLI Tools**: `fish` 4.x, `neovim` (with global `vi` and `vim` symlinks/aliases; zero `nano`/`vi`/`vim`), `git`, `lazygit`, `sudo`, `openssh`
-- **Compositor**: Noctalia Umbriel (`noctalia-dev/umbriel`, C++23 / Meson / `wlroots 0.20.x` + in-tree `umbrielfx`) + `xwayland-satellite`
-- **Login**: `greetd` + Noctalia Greeter (`noctalia-dev/noctalia-greeter`, C++20 / C bundled `wlroots 0.20`)
-- **Desktop Shell**: Noctalia Shell v5 (`noctalia-dev/noctalia`, C++23 / Meson) with built-in idle manager, Polkit agent, lockscreen & first-login theme picker
-- **Portals**: `xdg-desktop-portal-umbriel` + `xdg-desktop-portal-gtk`
-- **Theming & Base Apps**: `adw-gtk3-dark`, Papirus Icon Theme, WezTerm (Wayland + `/usr/bin/fish`, zero `libadwaita`), Nemo (`linuxmint/nemo`), Engrampa (`mate-desktop/engrampa`), Atril (`mate-desktop/atril`), imv (`~exec64/imv`), Zen Browser
-- **Dakota Native Steam Stack (`apps/steam.bst` + `deps/steam-compat-i686.bst` + `junctions/freedesktop-sdk-i686.bst`)**: Native Valve Steam launcher paired with cross-arch `i686` 32-bit Mesa/Vulkan/glibc runtime, Valve `steam-devices` controller udev rules, Feral `gamemode`, and the OGC kernel
-- **Flathub & Default Flatpak Suite (`core/flathub.bst` + `flatpaks/*.bst`)**: Pre-configured Flathub remote + Paperwork, Spotify, Heroic Games Launcher, Popsicle, Bitwarden, GIMP, mpv, Discord, Zed, and Collabora Office, with Noctalia v5 GTK3 & GTK4 Flatpak theme bridge (`xdg-config/gtk-3.0:ro` & `xdg-config/gtk-4.0:ro`)
-- **Bootc & Rust Packaging**: `bootc`, `bootupd`, `fish`, `greetd`, `xwayland-satellite`, and `wezterm` use `freedesktop-sdk` `components/rust.bst` + `cargo2` offline crate vendoring (`dakota-cargo2`)
+1. **Pure Freedesktop + Noctalia Stack**: Replaces all GNOME OS / `gnome-build-meta` components with clean `freedesktop-sdk`, `greetd` + Noctalia Greeter, Umbriel + Noctalia Shell v5, Luciole, WezTerm, imv, Zen Browser, native Steam, Homebrew CLI tools (`git`, `fish`, `neovim`, `lazygit`), CUPS printing, and an 11-app Flathub suite (Paperwork, File Roller, Spotify, Heroic, Popsicle, Bitwarden, GIMP, mpv, Discord, Zed, Collabora Office).
+2. **One Unified Gaming Image Only**: No non-gaming edition and no NVIDIA driver variant—ships a single open-source Mesa/Vulkan gaming image combining the Open Gaming Collective (OGC) kernel, `i686` Steam compat, `steam-devices`, and Feral GameMode.
 
-## Pre-Publish Tracking & Build
+## Quick Start (Build & Test)
 ```bash
-chmod +x scripts/bootstrap-track.sh scripts/build-oci.sh
+just validate        # Verify BuildStream 2 graph & closure
+just track           # Pin upstream git_repo, tar, and cargo2 refs
+just build           # Build the single gaming oci/bootc-image.bst
+just rechunk         # Slice ~120 OCI layers & run bootc container lint
+just boot-test       # Boot & smoke-test in ephemeral VM
+```
 
-# 1. Track and pin live upstream Git & Cargo.lock refs
-./scripts/bootstrap-track.sh
-
-# 2. Build the OCI bootc image
-./scripts/build-oci.sh latest
+## End-User Commands (`ujust`)
+```bash
+ujust update                  # Stage bootc upgrade + Flatpak & Brew updates
+ujust enroll-secure-boot-key  # Enroll Secure Boot MOK key
+ujust report                  # Gather OS & hardware state for issue reports
 ```

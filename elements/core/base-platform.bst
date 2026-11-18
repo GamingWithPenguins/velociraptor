@@ -1,13 +1,17 @@
 kind: stack
 
 description: |
-  Pure freedesktop-sdk core system stack (systemd, curl, sudo, openssh, PipeWire, Flatpak) + local system-plumbing.
+  Pure freedesktop-sdk core system stack (systemd, CUPS, curl, sudo, openssh, PipeWire, Flatpak) + local system-plumbing.
 
 depends:
 - junction: junctions/freedesktop-sdk.bst
   filename: public-stacks/runtime-minimal.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/systemd.bst
+- junction: junctions/freedesktop-sdk.bst
+  filename: components/cups.bst
+- junction: junctions/freedesktop-sdk.bst
+  filename: components/cups-daemon.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/curl.bst
 - junction: junctions/freedesktop-sdk.bst

@@ -8,6 +8,8 @@ sources:
   url: freedesktop:wlroots/wlroots.git
   track: "0.20.*"
   ref: 0.20.1-0-g6d491c8f2b14
+- kind: patch
+  path: patches/common/wlroots-umbriel-quirks.patch
 
 build-depends:
 - junction: junctions/freedesktop-sdk.bst

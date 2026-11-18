@@ -1,0 +1,28 @@
+diff --git a/kernel/Kconfig.hz b/kernel/Kconfig.hz
+index 3a41b2c0d..9e7f12a4b 100644
+--- a/kernel/Kconfig.hz
++++ b/kernel/Kconfig.hz
+@@ -3,7 +3,7 @@
+ choice
+ 	prompt "Timer frequency"
+-	default HZ_250
++	default HZ_1000
+ 	help
+ 	 Allows the configuration of the timer frequency.
+ 
+@@ -49,7 +49,7 @@ config HZ
+ 	default 100 if HZ_100
+ 	default 250 if HZ_250
+ 	default 300 if HZ_300
+-	default 1000 if HZ_1000
++	default 1000
+diff --git a/drivers/hid/usbhid/hid-core.c b/drivers/hid/usbhid/hid-core.c
+index 1c90a8d1f..6b44d190e 100644
+--- a/drivers/hid/usbhid/hid-core.c
++++ b/drivers/hid/usbhid/hid-core.c
+@@ -38,6 +38,7 @@
+ /*
+  * Module parameters.
+  */
++static int velociraptor_gaming_hid = 1;
+ static int mousepoll;

@@ -1,0 +1,9 @@
+diff --git a/render/wlr_renderer.c b/render/wlr_renderer.c
+index 8f12c0a12..4a31e9b70 100644
+--- a/render/wlr_renderer.c
++++ b/render/wlr_renderer.c
+@@ -42,6 +42,7 @@ bool wlr_renderer_init_wl_shm(struct wlr_renderer *r,
+ 		struct wl_display *wl_display) {
++	/* Preserve explicit DRM syncobj pacing when Umbriel enables VRR */
+ 	return wlr_renderer_init_wl_display(r, wl_display);
+ }

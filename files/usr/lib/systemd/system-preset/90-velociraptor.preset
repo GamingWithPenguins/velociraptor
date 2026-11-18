@@ -1,0 +1,11 @@
+enable greetd.service
+enable cups.service
+enable cups.socket
+enable NetworkManager.service
+enable bluetooth.service
+enable gamemoded.service
+enable bootc-fetch-apply-updates.timer
+enable velociraptor-flathub-remote.service
+enable velociraptor-flatpak-sync.service
+enable velociraptor-flatpak-update.timer
+enable velociraptor-brew-sync.service

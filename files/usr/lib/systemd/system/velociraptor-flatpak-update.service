@@ -1,0 +1,8 @@
+[Unit]
+Description=Update system Flatpak applications and runtimes
+After=network-online.target velociraptor-flatpak-sync.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flatpak update --system --noninteractive

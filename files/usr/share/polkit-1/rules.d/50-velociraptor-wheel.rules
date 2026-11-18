@@ -1,0 +1,12 @@
+polkit.addRule(function(action, subject) {
+  if (subject.isInGroup("wheel") && subject.active) {
+    if (
+      action.id.indexOf("org.freedesktop.Flatpak.") === 0 ||
+      action.id.indexOf("org.opensuse.cupspkhelper.mechanism.") === 0 ||
+      action.id.indexOf("org.freedesktop.NetworkManager.") === 0 ||
+      action.id.indexOf("org.freedesktop.udisks2.filesystem-mount") === 0
+    ) {
+      return polkit.Result.YES;
+    }
+  }
+});

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+JUSTFILE="/usr/share/velociraptor/just/10-system.just"
+if [[ $# -eq 0 ]]; then
+  exec /usr/bin/just --justfile "${JUSTFILE}" --list
+fi
+exec /usr/bin/just --justfile "${JUSTFILE}" "$@"

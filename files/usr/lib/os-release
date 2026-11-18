@@ -1,0 +1,14 @@
+NAME="velociraptor"
+PRETTY_NAME="velociraptor Gaming (Freedesktop + Noctalia)"
+ID=velociraptor
+ID_LIKE=freedesktop-sdk
+VERSION="1.0 (Rolling)"
+VERSION_ID=1.0
+VARIANT="Umbriel Gaming"
+VARIANT_ID=gaming
+DEFAULT_HOSTNAME=velociraptor
+HOME_URL="https://github.com/velociraptor-os/velociraptor"
+SUPPORT_URL="https://github.com/velociraptor-os/velociraptor/issues"
+BUG_REPORT_URL="https://github.com/velociraptor-os/velociraptor/issues"
+IMAGE_ID=velociraptor
+OSTREE_VERSION=1.0

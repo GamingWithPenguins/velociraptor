@@ -1,0 +1,15 @@
+[Unit]
+Description=Install Homebrew and deploy default Brewfile CLI suite
+After=network-online.target systemd-tmpfiles-setup.service
+Wants=network-online.target
+ConditionPathExists=!/var/home/linuxbrew/.linuxbrew/.velociraptor-brew-ready
+
+[Service]
+Type=oneshot
+User=linuxbrew
+Environment=NONINTERACTIVE=1
+Environment=HOME=/var/home/linuxbrew
+ExecStart=/bin/bash -c 'if [ ! -x /home/linuxbrew/.linuxbrew/bin/brew ]; then curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash; fi && /home/linuxbrew/.linuxbrew/bin/brew bundle --file=/etc/brew/Brewfile --no-upgrade && ln -sf nvim /home/linuxbrew/.linuxbrew/bin/vi && ln -sf nvim /home/linuxbrew/.linuxbrew/bin/vim && touch /var/home/linuxbrew/.linuxbrew/.velociraptor-brew-ready'
+
+[Install]
+WantedBy=multi-user.target

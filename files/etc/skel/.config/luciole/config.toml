@@ -1,0 +1,10 @@
+[general]
+default_view = "list"
+show_hidden = false
+show_preview = true
+terminal = "wezterm"
+archive_manager = "flatpak run org.gnome.FileRoller"
+
+[appearance]
+icon_theme = "Papirus-Dark"
+sync_noctalia_theme = true

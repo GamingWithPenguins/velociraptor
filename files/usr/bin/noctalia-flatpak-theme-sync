@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+flatpak override --user \
+  --filesystem=xdg-config/gtk-3.0:ro \
+  --filesystem=xdg-config/gtk-4.0:ro \
+  --filesystem=xdg-data/themes:ro \
+  --filesystem=xdg-data/icons:ro \
+  --filesystem=/usr/share/themes:ro \
+  --filesystem=/usr/share/icons:ro \
+  --env=GTK_THEME=adw-gtk3-dark \
+  --env=ICON_THEME=Papirus-Dark

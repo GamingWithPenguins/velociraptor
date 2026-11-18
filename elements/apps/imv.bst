@@ -13,7 +13,7 @@ build-depends:
 - junction: junctions/freedesktop-sdk.bst
   filename: public-stacks/buildsystem-meson.bst
 - core/base-platform.bst
-- deps/gtk3-companions.bst
+- deps/desktop-libs.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/wayland.bst
 - junction: junctions/freedesktop-sdk.bst
@@ -37,7 +37,7 @@ build-depends:
 
 runtime-depends:
 - core/base-platform.bst
-- deps/gtk3-companions.bst
+- deps/desktop-libs.bst
 - desktop/papirus-icon-theme.bst
 - junction: junctions/freedesktop-sdk.bst
   filename: components/librsvg.bst

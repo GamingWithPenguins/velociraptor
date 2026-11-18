@@ -12,7 +12,7 @@ sources:
 build-depends:
 - junction: junctions/freedesktop-sdk.bst
   filename: public-stacks/buildsystem-meson.bst
-- deps/gtk3-companions.bst
+- deps/desktop-libs.bst
 
 runtime-depends:
-- deps/gtk3-companions.bst
+- deps/desktop-libs.bst

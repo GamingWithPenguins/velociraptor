@@ -1,7 +1,7 @@
 kind: manual
 
 description: |
-  UEFI bootloader stack (systemd-boot + bootupd + efibootmgr for Release 1; isolated for future rEFInd replacement).
+  UEFI bootloader stack (systemd-boot EFI payloads + bootupd + efibootmgr for Release 1; isolated for future rEFInd replacement).
 
 sources:
 - kind: git_repo
@@ -35,4 +35,10 @@ config:
   install-commands:
   - |
     make install DESTDIR="%{install-root}" PREFIX="%{prefix}"
-    mkdir -p "%{install-root}/usr/lib/bootupd/updates"
+    EFI_ARCH="x64"
+    EFI_UPDATES="%{install-root}%{indep-libdir}/bootupd/updates"
+    install -Dm644 "%{indep-libdir}/systemd/boot/efi/systemd-boot${EFI_ARCH}.efi" \
+      "${EFI_UPDATES}/EFI/systemd/systemd-boot${EFI_ARCH}.efi"
+    install -Dm644 "%{indep-libdir}/systemd/boot/efi/systemd-boot${EFI_ARCH}.efi" \
+      "${EFI_UPDATES}/EFI/BOOT/BOOT${EFI_ARCH^^}.EFI"
+    bootupctl backend generate-update-metadata "%{install-root}"

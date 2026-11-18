@@ -1,0 +1,7 @@
+.bst/
+out/
+keys/*.key
+keys/*.pem
+*.raw
+*.qcow2
+*.iso
