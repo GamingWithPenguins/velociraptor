@@ -20,3 +20,4 @@ ujust update                  # Stage bootc upgrade + Flatpak & Brew updates
 ujust enroll-secure-boot-key  # Enroll Secure Boot MOK key
 ujust report                  # Gather OS & hardware state for issue reports
 ```
+![Please do not resize this app](https://img.shields.io/badge/don't%20resize-1920x1080_only-blue) 
